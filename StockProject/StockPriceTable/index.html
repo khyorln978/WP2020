@@ -4,18 +4,22 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Running JavaScript</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/my-style.css">
   </head>
   <body>
-    <table style="width: 100%">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="js/bootstrap.js">
+    <table class="table table-striped table-condensed header-fixed" style="width: 100%">
       <thead>
         <tr>
+          <th style="width: 10%">Line No.</th>
           <th style="width: 10%">Date</th>
-          <th style="width: 18%">LG</th>
-          <th style="width: 18%">NAVER</th>
-          <th style="width: 18%">SK</th>
-          <th style="width: 18%">삼성전자</th>
-          <th style="width: 18%">카카오</th>
+          <th style="width: 16%">SK하이닉스</th>
+          <th style="width: 16%">NAVER</th>
+          <th style="width: 16%">LG화학</th>
+          <th style="width: 16%">현대차</th>
+          <th style="width: 16%">카카오</th>
         </tr>
       </thead>
       <tbody id="tbody"></tbody>
@@ -24,7 +28,7 @@
     <script src="utils.js"></script>
     <script src="csvdata_all.js"></script>
     <script>
-      const selNames = ['LG', 'NAVER', 'SK', '삼성전자', '카카오'];
+      const selNames = ['SK하이닉스', 'NAVER', 'LG화학', '현대차', '카카오'];
       const csv = getCsvData();
       //console.log(csv);
       const json = csv2json(csv);
@@ -37,10 +41,10 @@
         const da = rows[i]['date'];
         const cols = rows[i]['cols'];
 
-        let tabrow = '<tr>' + '<td style="width: 10%">' + da + '</td>';
+        let tabrow = '<tr>' + '<td style="width: 10%; text-align:left;">' + (i+1)  + '</td>' + '<td style="width: 10%; text-align:left;">' + da + '</td>';
         for (let j = 0; j < cols.length; j++) {// col count
           tabrow =
-            tabrow + '<td style="width:18%; text-align:center;">' + cols[j]['price'] + '</td>';
+            tabrow + '<td style="width:16%; text-align:center;">' + cols[j]['price'] + '</td>';
         }
         tabrow += '</tr>';
         $('#tbody').append(tabrow);// using jQuery
