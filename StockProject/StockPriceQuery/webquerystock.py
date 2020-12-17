@@ -20,8 +20,17 @@ DB = DBHelper()
 
 @app.route("/", methods=['GET','POST'])
 def home():
-    #session.clear()
-
+    #add session
+    if request.method == 'POST':
+        gubun= request.form.get('gubun')
+        grade = request.form.get('grade')
+        stu_dept = request.form.get('stu_dept')
+        stu_name = request.form.get('stu_name')
+        queryObj = {'gubun':gubun, 'grade':grade, 'stu_dept':stu_dept, 'stu_name':stu_name}
+        print ('queryObj=', queryObj)        
+        session['queryObj'] = queryObj
+        return redirect(url_for('home'))
+    
     return render_template("home.html")
 
 @app.route("/listprice", methods=['GET','POST'])
