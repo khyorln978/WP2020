@@ -62,7 +62,7 @@
       </div>
       <div class="row">
         <div id="priceTable"></div>
-        <table style="width: 100%">
+        <table class="table table-striped table-condensed header-fixed" style="width: 100%">
           <thead id="thead"></thead>
           <tbody id="tbody"></tbody>
         </table>
@@ -119,7 +119,7 @@
         if (selList.length === 0) return;
         //var url = 'http://220.67.121.119/stockapi/getprice/' + gdays; // CORS 문제
         //var url = 'http://127.0.0.1:5001/getprice/' + gdays; // CORS 아님
-        var url = 'http://127.0.0.1:5005/getprice/' + gdays; // CORS 사용
+        var url = 'http://127.0.0.1:5001/getprice/' + gdays; // CORS 사용
 
         console.log(url);
         $.getJSON(url, function (json) {
@@ -127,17 +127,17 @@
           let head = json.head;
           let rows = json.rows;
           //$('#priceTable').html('<div>' + JSON.stringify(json) + '</div>');
-          let tabHeadRow = '<td style="text-align:right;">date</td>';
+          let tabHeadRow = '<th style="width: 10%; text-align:left;">date</th>';
           let selCols = [];
           for (let j = 0; j < head.length; j++) {
             //console.log('head[j]=', head[j]);
             if (selList.includes(head[j])) {
               selCols.push(j);
-              tabHeadRow += '<td style="text-align:right;">' + head[j] + '</td>';
+              tabHeadRow += '<th style="text-align:right;">' + head[j] + '</th>';
             }
           }
           console.log('tabHeadRow=', tabHeadRow);
-          $('#thead').html('<tr>' + tabHeadRow + '</tr>'); // using jQuery
+          $('#thead').html('<tr>' +  tabHeadRow + '</tr>'); // using jQuery
 
           // build Table Row
           let tabRows = '';
@@ -145,7 +145,7 @@
             // row count
             const da = rows[i][0];
 
-            let tabrow = '<tr>' + '<td style="text-align:right;">' + da + '</td>';
+            let tabrow = '<tr>' + '<td style="width:10%"; text-align:left;">' + da + '</td>';
             for (let j = 0; j < selCols.length; j++) {
               // col count
               tabrow += '<td style="text-align:right;">' + rows[i][selCols[j]] + '</td>';
@@ -164,4 +164,10 @@
       function deleteTable() {}
     </script>
   </body>
+  <div class="container">
+    <hr>
+    <footer>
+      <p>&copy; 2018 HUFS</p>
+    </footer>
+  </div>
 </html>
