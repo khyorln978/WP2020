@@ -36,7 +36,7 @@
       <img id="JumbotronImage" src="../static/img/seorak.jpg" />
     </div>
 
-    <div class="container-fluid">
+    <div class="container">
       <div class="row">
         <form class="form-inline">
           <div class="form-group">
@@ -61,13 +61,16 @@
         </div>
       </div>
       <div class="row">
-        <div class="col" id="table"></div>
+        <div id="priceTable"></div>
+        <table class="table table-striped table-condensed header-fixed" style="width: 100%">
+          <thead id="thead"></thead>
+          <tbody id="tbody"></tbody>
+        </table>
       </div>
       <div class="row">
         <div id="svgFig1"></div>
       </div>
     </div>
-      
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -108,7 +111,7 @@
           $.getJSON(url, function (data) {
             var json = data;
             console.log(json);
-            $('#svgFig1').append(json.svg);
+            $('#svgFig1').append('<div>' + json.svg + '</div>');
           });
         }
       }
@@ -134,8 +137,7 @@
             }
           }
           console.log('tabHeadRow=', tabHeadRow);
-          let thead = '<thead>' + '<tr>' + tabHeadRow + '</tr>' + '</thead>';
-          //$('#thead').html('<tr>' +  tabHeadRow + '</tr>'); // using jQuery
+          $('#thead').html('<tr>' +  tabHeadRow + '</tr>'); // using jQuery
 
           // build Table Row
           let tabRows = '';
@@ -151,11 +153,8 @@
             tabrow += '</tr>';
             tabRows += tabrow;
           }
-          let tbody = '<tbody>' + tabRows + '</tbody>';
-         // $('#tbody').html(tabRows); // using jQuery
-          $('#table').html('<table class="table table-striped table-condensed header-fixed" style="width: 50%">' + thead + tbody + '</table>');
+          $('#tbody').html(tabRows); // using jQuery
         });
- 
       }
       function setDays() {
         console.log($('#days').val());
@@ -164,9 +163,7 @@
       function deleteChart() {
         $('#svgFig1').remove();
       }
-      function deleteTable() {
-        $('#table').remove();
-      }
+      function deleteTable() {}
     </script>
   </body>
   <div class="container">
